@@ -2,6 +2,11 @@
 	"name": "mdrss-ts",
 	"module": "backend/index.ts",
 	"type": "module",
+	"license": "MPL-2.0",
+	"scripts": {
+		"start": "bun run ./backend/index.ts",
+		"watch": "bun --watch run ./backend/index.ts"
+	},
 	"devDependencies": {
 		"@types/bun": "latest"
 	},
