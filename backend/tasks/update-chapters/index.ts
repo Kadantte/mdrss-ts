@@ -4,13 +4,25 @@ import { tChapters, tManga, tUsers } from '../../database/schema'
 import { fetchChaptersSince, type MdChapter } from './fetch'
 import dayjs from 'dayjs'
 
+let _timeout: null | Timer = null
+function queueChaptersUpdate(t = 5 * 60 * 1000) {
+	const run = () =>
+		updateChapters().catch(e => {
+			console.error('Error updating chapters:', e)
+			queueChaptersUpdate()
+		})
+	if (_timeout) clearTimeout(_timeout)
+	_timeout = setTimeout(run, t)
+}
+queueChaptersUpdate(0)
+
 export async function updateChapters() {
 	const latestChapter = await db.query.tChapters.findFirst({
 		orderBy: desc(tChapters.publishedAt)
 	})
-	const chapters = await fetchChaptersSince(
+	const updateFromDate =
 		latestChapter?.publishedAt || dayjs().subtract(30, 'days').toDate()
-	)
+	const chapters = await fetchChaptersSince(updateFromDate)
 
 	for (const chapter of chapters) {
 		await saveUser(chapter.uploader)
@@ -18,7 +30,19 @@ export async function updateChapters() {
 		await saveChapter(chapter)
 	}
 
-	console.log(`Updated ${chapters.length} chapters`)
+	const prefix = `Updating from ${dayjs(updateFromDate).format(
+		'YYYY-MM-DD HH:mm'
+	)}:`
+	if (
+		chapters.length === 0 ||
+		chapters.every(c => dayjs(c.publishedAt).isSame(updateFromDate, 'second'))
+	) {
+		console.log(`${prefix} No new chapters found`)
+		queueChaptersUpdate()
+	} else {
+		console.log(`${prefix} Added ${chapters.length} chapters`)
+		queueChaptersUpdate(5000)
+	}
 }
 
 async function saveUser(user: MdChapter['uploader']) {

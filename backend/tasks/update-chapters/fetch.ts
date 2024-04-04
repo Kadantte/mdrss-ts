@@ -2,10 +2,10 @@ import dayjs from 'dayjs'
 
 export async function fetchChaptersSince(since: Date) {
 	const params = new URLSearchParams({
-		limit: '50',
-		publishAtSince: formatMdDate(since)!,
+		limit: '100',
+		publishAtSince: formatMdDate(since),
 		'order[publishAt]': 'asc',
-		includeFutureUpdates: '0'
+		includeFuturePublishAt: '0'
 	})
 	params.append('includes[]', 'manga')
 	params.append('includes[]', 'user')
@@ -66,6 +66,6 @@ function compactMdRelationshipObject<T = any>(obj: any): T {
 	}
 }
 
-function formatMdDate(d?: Date) {
-	return d?.toISOString().split('.')[0]
+function formatMdDate(d: Date) {
+	return d.toISOString().split('.')[0]
 }
