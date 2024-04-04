@@ -1,5 +1,6 @@
 import { feedHandler } from './routes/feed'
 import { frontendHandler } from './routes/frontend'
+import { updateChapters } from './tasks/update-chapters'
 
 const server = Bun.serve({
 	fetch(request) {
@@ -11,3 +12,5 @@ const server = Bun.serve({
 })
 
 console.log(`Server running at ${server.url}`)
+
+updateChapters()
