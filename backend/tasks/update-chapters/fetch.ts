@@ -45,7 +45,7 @@ export async function fetchChaptersSince(since: Date) {
 				),
 			manga: compactMdRelationshipObject<{
 				id: string
-				title: string
+				title: Record<string, string>
 				originalLanguage: string
 				tags: Array<{
 					id: string

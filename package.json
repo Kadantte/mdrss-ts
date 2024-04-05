@@ -26,6 +26,7 @@
   "dependencies": {
     "dayjs": "^1.11.10",
     "drizzle-orm": "^0.30.7",
+    "feed": "^4.2.2",
     "postgres": "^3.4.4"
   }
 }

@@ -35,7 +35,7 @@ export const tScanlationGroup = pgTable('scanlation_group', {
 
 export const tManga = pgTable('manga', {
 	...defaultColumns(),
-	title: jsonb('title').notNull(),
+	title: jsonb('title').notNull().$type<Record<string, string>>(),
 	originalLanguage: text('original_language').notNull(),
 	tagUuids: text('tags').notNull().array()
 })

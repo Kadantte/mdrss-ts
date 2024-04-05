@@ -1,6 +1,11 @@
 import { desc } from 'drizzle-orm'
 import { db } from '../../database'
-import { tChapters, tManga, tUsers } from '../../database/schema'
+import {
+	tChapters,
+	tManga,
+	tScanlationGroup,
+	tUsers
+} from '../../database/schema'
 import { fetchChaptersSince, type MdChapter } from './fetch'
 import dayjs from 'dayjs'
 
@@ -28,6 +33,7 @@ export async function updateChapters() {
 		await saveUser(chapter.uploader)
 		await saveManga(chapter.manga)
 		await saveChapter(chapter)
+		for (const group of chapter.groups) await saveGroup(group)
 	}
 
 	const prefix = `Updating from ${dayjs(updateFromDate).format(
@@ -87,6 +93,17 @@ async function saveChapter(chapter: MdChapter) {
 		.values({ id: chapter.id, ...data })
 		.onConflictDoUpdate({
 			target: tChapters.id,
+			set: data
+		})
+}
+
+async function saveGroup(group: MdChapter['groups'][0]) {
+	const data = { name: group.name }
+	await db
+		.insert(tScanlationGroup)
+		.values({ id: group.id, ...data })
+		.onConflictDoUpdate({
+			target: tScanlationGroup.id,
 			set: data
 		})
 }
