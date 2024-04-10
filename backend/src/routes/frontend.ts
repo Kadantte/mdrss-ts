@@ -1,6 +1,6 @@
 import path from 'path'
 
-const FRONTEND_PATH = path.join(__dirname, '../../frontend')
+const FRONTEND_PATH = path.join(__dirname, '../../../frontend/.output/public')
 
 export const frontendHandler = async (
 	req: Request,

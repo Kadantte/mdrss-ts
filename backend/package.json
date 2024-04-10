@@ -1,0 +1,34 @@
+{
+	"name": "mdrss-ts-backend",
+	"type": "module",
+	"license": "MPL-2.0",
+	"private": true,
+	"scripts": {
+		"start": "bun run ./src/index.ts",
+		"dev": "bun --watch run ./src/index.ts",
+		"generate": "drizzle-kit generate:pg",
+		"db:up": "bun run ./src/database/migrate.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"drizzle-kit": "^0.20.14",
+		"pg": "^8.11.5",
+		"vue": "3.4.21"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"prettier": {
+		"singleQuote": true,
+		"semi": false,
+		"trailingComma": "none",
+		"useTabs": true,
+		"arrowParens": "avoid"
+	},
+	"dependencies": {
+		"dayjs": "^1.11.10",
+		"drizzle-orm": "^0.30.7",
+		"feed": "^4.2.2",
+		"postgres": "^3.4.4"
+	}
+}

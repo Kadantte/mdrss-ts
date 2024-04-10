@@ -1,32 +1,23 @@
 {
-  "name": "mdrss-ts",
-  "module": "backend/index.ts",
-  "type": "module",
-  "license": "MPL-2.0",
-  "scripts": {
-    "start": "bun run ./backend/index.ts",
-    "watch": "bun --watch run ./backend/index.ts",
-    "generate": "drizzle-kit generate:pg"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "drizzle-kit": "^0.20.14",
-    "pg": "^8.11.5"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "semi": false,
-    "trailingComma": "none",
-    "useTabs": true,
-    "arrowParens": "avoid"
-  },
-  "dependencies": {
-    "dayjs": "^1.11.10",
-    "drizzle-orm": "^0.30.7",
-    "feed": "^4.2.2",
-    "postgres": "^3.4.4"
-  }
+	"name": "mdrss-ts",
+	"license": "MPL-2.0",
+	"workspaces": [
+		"backend",
+		"frontend"
+	],
+	"scripts": {
+		"start": "bun run --cwd backend start",
+		"build": "bun run f:build",
+		"f:dev": "bun run --cwd frontend dev",
+		"f:build": "bun run --cwd frontend generate",
+		"b:dev": "bun run --cwd backend dev",
+		"db:up": "bun run --cwd backend db:up"
+	},
+	"prettier": {
+		"singleQuote": true,
+		"semi": false,
+		"trailingComma": "none",
+		"useTabs": true,
+		"arrowParens": "avoid"
+	}
 }
