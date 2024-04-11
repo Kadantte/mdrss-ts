@@ -2,7 +2,7 @@
 	<div class="flex flex-col gap-2">
 		<h1 class="text-3xl font-bold">MangaDex Feed Generator</h1>
 		<p>
-			Create RSS, Atom and JSON feeds for Mangadex. The project is
+			Create RSS feeds for Mangadex. The project is
 			<a href="https://github.com/kindlyfire/mdrss-ts" target="_blank"
 				>open-source</a
 			>.
@@ -123,6 +123,12 @@ async function copyToClipboard() {
 		timeout: 2000
 	})
 }
+
+useHead({})
+useSeoMeta({
+	title: 'MangaDex Feed Generator',
+	description: 'Create RSS feeds for Mangadex.'
+})
 </script>
 
 <style></style>
