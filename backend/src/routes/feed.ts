@@ -1,4 +1,13 @@
-import { SQL, and, arrayContains, desc, eq, inArray, or } from 'drizzle-orm'
+import {
+	SQL,
+	and,
+	arrayContains,
+	desc,
+	eq,
+	inArray,
+	not,
+	or
+} from 'drizzle-orm'
 import { tChapters, tManga, tScanlationGroup, tUsers } from '../database/schema'
 import { db } from '../database'
 import { Feed } from 'feed'
@@ -117,7 +126,9 @@ function queryToSql(query: ParsedQuery) {
 		querySql.push(arrayContains(tManga.tagUuids, q.tags))
 	}
 	if (q.ntags.length) {
-		querySql.push(and(...q.ntags.map(v => arrayContains(tManga.tagUuids, [v]))))
+		querySql.push(
+			and(...q.ntags.map(v => not(arrayContains(tManga.tagUuids, [v]))))
+		)
 	}
 
 	return and(...querySql)
