@@ -63,10 +63,13 @@ async function executeQueries(queries: ParsedQuery[]) {
 	const groupIds = Array.from(
 		new Set(results.flatMap(v => v.chapters.groupUuids ?? []))
 	)
-	const groups = await db
-		.select()
-		.from(tScanlationGroup)
-		.where(inArray(tScanlationGroup.id, groupIds))
+	const groups =
+		groupIds.length === 0
+			? []
+			: await db
+					.select()
+					.from(tScanlationGroup)
+					.where(inArray(tScanlationGroup.id, groupIds))
 
 	return results.map(r => {
 		return {
