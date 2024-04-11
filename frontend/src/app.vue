@@ -103,11 +103,16 @@ function addDefaultQuery() {
 }
 addDefaultQuery()
 
+const isClient = ref(false)
+onMounted(() => (isClient.value = true))
+
 const url = computed(() => {
 	const params = new URLSearchParams()
 	for (const q of queries) {
 		params.append('q', q.map(v => v.type + ':' + v.value).join(','))
 	}
+
+	if (!isClient.value) return ''
 	return `${window.location.origin}/feed?${params
 		.toString()
 		.replaceAll('%3A', ':')}`

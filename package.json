@@ -6,12 +6,11 @@
 		"frontend"
 	],
 	"scripts": {
-		"start": "bun run --cwd backend start",
-		"build": "bun run f:build",
-		"fdev": "bun run --cwd frontend dev",
+		"start": "bun run --bun --cwd backend start",
+		"fdev": "bun run --bun --cwd frontend dev",
 		"fbuild": "bun run --cwd frontend generate",
-		"bdev": "bun run --cwd backend dev",
-		"migrate": "bun run --cwd backend migrate"
+		"bdev": "bun run --bun --cwd backend dev",
+		"migrate": "bun run --bun --cwd backend migrate"
 	},
 	"prettier": {
 		"singleQuote": true,
