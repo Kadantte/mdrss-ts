@@ -7,11 +7,22 @@
 				value-attribute="value"
 				v-model="m.type"
 			></USelect>
+
 			<UInput
 				class="grow font-mono"
 				v-model="m.value"
 				:placeholder="matcherPlaceholders[m.type]"
+				v-if="m.type !== 'tags' && m.type !== 'ntags'"
 			></UInput>
+			<USelect
+				class="grow"
+				:options="tags"
+				option-attribute="name"
+				value-attribute="id"
+				v-model="m.value"
+				v-else
+			></USelect>
+
 			<UButton square variant="soft" @click="removeMatcher(i)">
 				<UIcon name="ph:x-bold" dynamic class="text-xl" />
 			</UButton>
@@ -30,6 +41,7 @@
 
 <script lang="ts" setup>
 import type { Query } from '../types'
+import tags from '../assets/tags.json'
 
 const props = defineProps<{
 	query: Query

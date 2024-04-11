@@ -115,7 +115,8 @@ const url = computed(() => {
 	if (!isClient.value) return ''
 	return `${window.location.origin}/feed?${params
 		.toString()
-		.replaceAll('%3A', ':')}`
+		.replaceAll('%3A', ':')
+		.replaceAll('%2C', ',')}`
 })
 
 function removeQuery(i: number) {
