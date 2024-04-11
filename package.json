@@ -8,10 +8,10 @@
 	"scripts": {
 		"start": "bun run --cwd backend start",
 		"build": "bun run f:build",
-		"f:dev": "bun run --cwd frontend dev",
-		"f:build": "bun run --cwd frontend generate",
-		"b:dev": "bun run --cwd backend dev",
-		"db:up": "bun run --cwd backend db:up"
+		"fdev": "bun run --cwd frontend dev",
+		"fbuild": "bun run --cwd frontend generate",
+		"bdev": "bun run --cwd backend dev",
+		"migrate": "bun run --cwd backend migrate"
 	},
 	"prettier": {
 		"singleQuote": true,

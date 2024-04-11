@@ -1,5 +1,5 @@
 export interface QueryMatcher {
-	type: 'manga' | 'user' | 'group' | 'ol' | 'tl'
+	type: 'manga' | 'user' | 'groups' | 'ol' | 'tl' | 'tags' | 'ntags'
 	value: string
 }
 

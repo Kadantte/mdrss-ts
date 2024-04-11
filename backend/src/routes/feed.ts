@@ -39,7 +39,7 @@ function parseQuery(rawQuery: string[]) {
 		{
 			manga: extract('manga'),
 			users: extract('user'),
-			groups: extract('groups'),
+			groups: extract('groups').concat(extract('group')),
 			languages: extract('tl'),
 			originalLanguages: extract('ol'),
 			tags: extract('tags'),

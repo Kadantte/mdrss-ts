@@ -26,7 +26,7 @@ export async function updateChapters() {
 		orderBy: desc(tChapters.publishedAt)
 	})
 	const updateFromDate =
-		latestChapter?.publishedAt || dayjs().subtract(30, 'days').toDate()
+		latestChapter?.publishedAt || dayjs().subtract(90, 'days').toDate()
 	const chapters = await fetchChaptersSince(updateFromDate)
 
 	for (const chapter of chapters) {

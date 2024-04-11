@@ -7,7 +7,7 @@
 		"start": "bun run ./src/index.ts",
 		"dev": "bun --watch run ./src/index.ts",
 		"generate": "drizzle-kit generate:pg",
-		"db:up": "bun run ./src/database/migrate.ts"
+		"migrate": "bun run ./src/database/migrate.ts"
 	},
 	"devDependencies": {
 		"@types/bun": "latest",

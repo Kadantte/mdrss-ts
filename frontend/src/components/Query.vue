@@ -7,8 +7,12 @@
 				value-attribute="value"
 				v-model="m.type"
 			></USelect>
-			<UInput class="grow font-mono" v-model="m.value"></UInput>
-			<UButton square variant="soft" @click="query.splice(i, 1)">
+			<UInput
+				class="grow font-mono"
+				v-model="m.value"
+				:placeholder="matcherPlaceholders[m.type]"
+			></UInput>
+			<UButton square variant="soft" @click="removeMatcher(i)">
 				<UIcon name="ph:x-bold" dynamic class="text-xl" />
 			</UButton>
 		</div>
@@ -30,6 +34,14 @@ import type { Query } from '../types'
 const props = defineProps<{
 	query: Query
 }>()
+const emit = defineEmits<{
+	remove: []
+}>()
+
+function removeMatcher(i: number) {
+	props.query.splice(i, 1)
+	if (props.query.length === 0) emit('remove')
+}
 
 const options = [
 	{
@@ -61,4 +73,14 @@ const options = [
 		value: 'ntags'
 	}
 ]
+
+const matcherPlaceholders = {
+	manga: 'UUID',
+	groups: 'UUID',
+	user: 'UUID',
+	tl: 'Language code',
+	ol: 'Language code',
+	tags: 'UUID',
+	ntags: 'UUID'
+}
 </script>
