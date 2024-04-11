@@ -40,7 +40,7 @@ export async function fetchChaptersSince(since: Date) {
 				.map(v =>
 					compactMdRelationshipObject<{
 						id: string
-						name: string
+						name?: string | null
 					}>(v)
 				),
 			manga: compactMdRelationshipObject<{

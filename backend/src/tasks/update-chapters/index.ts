@@ -98,7 +98,7 @@ async function saveChapter(chapter: MdChapter) {
 }
 
 async function saveGroup(group: MdChapter['groups'][0]) {
-	const data = { name: group.name }
+	const data = { name: group.name || '' }
 	await db
 		.insert(tScanlationGroup)
 		.values({ id: group.id, ...data })
